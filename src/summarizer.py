@@ -27,7 +27,7 @@ def get_gpt_response(text, tpr):
 
 def get_prompt_text(comments, inter_summary):
     result = inter_summary
-    while get_token_num(result) + get_token_num(comments[0]) < config.getint('other','prompt_token_hard_limit'):
+    while get_token_num(result) + get_token_num(comments[0]) < config.getint('other','prompt_token_limit'):
         result += comments.pop(0)
         if len(comments) == 0:
             break

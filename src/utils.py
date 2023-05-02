@@ -40,7 +40,7 @@ def extract_issue_comments (issue_data: Dict) -> str:
             comment["body"] = re.sub(r'\n\s*\n', '\n', comment["body"])
 
             #1つのコメントがpromptとして長くなりすぎる場合は要約対象から外す
-            if get_token_num(comment["body"]) > config.getint('other','prompt_token_soft_limit'):
+            if get_token_num(comment["body"]) > config.getint('other','comment_token_limit'):
                 print("Sorry this comment is too long, eliminated:\n{url}".format(url=comment["html_url"]))
                 continue
             
