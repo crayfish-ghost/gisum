@@ -41,6 +41,7 @@ Now summarizing 18 comments ... ( last 0 )
 ## 注意点
 - gisumは再帰的にChatGPTのAPIを繰り返し呼び出すため、Issueのcomment量によっては課金額が高額になる可能性があります
 - 画像で説明されているissueのコメントは要約に反映されません
+- 長過ぎるcomment(デフォルトで2000token以上)はpromptが作れなくなる恐れがあるため要約対象外としています
 - issueが長くなればなるほど要約の精度は低くなると思います
 
 ## ライセンス
