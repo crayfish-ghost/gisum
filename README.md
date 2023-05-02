@@ -21,6 +21,11 @@ python3 gisum.py {githubのIssueのURL}
 ## 実行例
 ```bash
 $ python3 gisum.py https://github.com/ztjhz/BetterChatGPT/issues/83
+Sorry this comment is too long, eliminated:
+https://github.com/ztjhz/BetterChatGPT/issues/83#issuecomment-1492919219
+all comments:18
+Now summarizing 18 comments ... ( last 0 )
+
 議論のテーマ: CentOS8サーバーのデプロイに関する問題
 ステータス: 解決済み
 内容:
