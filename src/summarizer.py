@@ -47,7 +47,7 @@ def create_prompt(text, is_last, has_summary):
 
     if is_last:
         # 最終的に表示する要約
-        prompt += config.get('prompt','do_summarize').format(WORD_NUM=config.get('other','summary_word_num'), LANG=config.get('other','summary_language')) + config.get('prompt','make_easy') + OUTPUT_FORMAT
+        prompt += config.get('prompt','do_summarize').format(WORD_NUM=config.get('other','output_summary_word_num'), LANG=config.get('other','output_summary_language')) + config.get('prompt','make_easy') + OUTPUT_FORMAT
     else:
         # 部分的な要約
         prompt += config.get('prompt','do_summarize').format(WORD_NUM=config.get('other','inter_summary_word_num'), LANG=config.get('other','inter_summary_language'))
