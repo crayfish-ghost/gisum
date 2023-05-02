@@ -1,7 +1,7 @@
 # gisum
 
 ## 概要
-gisumは、GitHubのIssueを読み込み、OpenAIのChatGPTを使って要約するアプリケーションです。  
+gisumは、GitHubのIssueを読み込み、OpenAIのChatGPTを使って要約するスクリプトです。  
 ChatGPTの入力上限を超えた長いIssueでも、テキストを再帰的に要約することで入力上限を回避しています。
 
 ## 実行方法
@@ -34,7 +34,9 @@ $ python3 gisum.py https://github.com/ztjhz/BetterChatGPT/issues/83
 ```
 
 ## 注意点
-gisumは再帰的にChatGPTのAPIを繰り返し呼び出すため、Issueのcomment量によっては課金額が高額になる可能性があります
+- gisumは再帰的にChatGPTのAPIを繰り返し呼び出すため、Issueのcomment量によっては課金額が高額になる可能性があります
+- 画像で説明されているissueのコメントは要約に反映されません
+- issueが長くなればなるほど要約の精度は低くなると思います
 
 ## ライセンス
 MIT
