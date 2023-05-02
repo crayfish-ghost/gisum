@@ -70,5 +70,6 @@ def summarize(issue_comments):
         inter_summary = get_summary(next_prompt_text, is_last, has_summary)
         inter_summary += "\n\n"
         has_summary = True
-        
+
+    print("")
     return inter_summary
