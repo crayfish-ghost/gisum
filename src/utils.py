@@ -1,5 +1,7 @@
 import re, os, json
 from urllib.parse import urlparse, urlunparse
+from .tokenizer import get_token_num
+from .read_config import config
 from typing import Dict, List
 
 def convert_url_to_api(url: str) -> str:
@@ -36,6 +38,11 @@ def extract_issue_comments (issue_data: Dict) -> str:
         for comment in page:
             text = ""
             comment["body"] = re.sub(r'\n\s*\n', '\n', comment["body"])
+
+            #1つのコメントがpromptとして長くなりすぎる場合は要約対象から外す
+            if get_token_num(comment["body"]) > config.getint('other','prompt_token_soft_limit'):
+                print("Sorry this comment is too long, eliminated:\n{url}".format(url=comment["html_url"]))
+                continue
             
             line_head=" User:{user}, created_at:{created_at}\n".format(user=comment["user"]["login"]
                                                              ,created_at=comment["created_at"])

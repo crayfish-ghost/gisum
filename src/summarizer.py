@@ -3,9 +3,8 @@ import requests
 import tiktoken
 from tiktoken.core import Encoding
 from .read_config import config
+from .tokenizer import get_token_num
 from . import chatgpt
-
-encoding: Encoding = tiktoken.encoding_for_model(config.get('gpt','model'))
 
 OUTPUT_FORMAT = """
 Output should follow the format below.
@@ -26,12 +25,9 @@ def get_gpt_response(text, tpr):
     )
     return response['choices'][0]['message']['content']
 
-def get_token_num(text):
-    return len( encoding.encode(text) )
-
 def get_prompt_text(comments, inter_summary):
     result = inter_summary
-    while get_token_num(result) + get_token_num(comments[0]) < config.getint('other','prompt_max_token'):
+    while get_token_num(result) + get_token_num(comments[0]) < config.getint('other','prompt_token_hard_limit'):
         result += comments.pop(0)
         if len(comments) == 0:
             break
@@ -61,9 +57,14 @@ def get_summary(text, is_last, has_summary):
 def summarize(issue_comments):
     inter_summary = ""
     has_summary = False
+    all_comments_num = len(issue_comments)
+    print( "all comments:" + str( all_comments_num ) )
     while len(issue_comments) > 0:
         next_prompt_text = get_prompt_text(issue_comments
                                        ,inter_summary)
+
+        last_num = len(issue_comments)
+        print("Now summarizing {sum_num} comments ... ( last {last_num} )".format(sum_num=str(all_comments_num-last_num),last_num=str(last_num)) )
 
         is_last = len(issue_comments) == 0
         inter_summary = get_summary(next_prompt_text, is_last, has_summary)
